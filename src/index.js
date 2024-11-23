@@ -495,7 +495,25 @@ class PhoneInput extends React.Component {
 
   handleFlagDropdownClick = (e) => {
     e.preventDefault();
+
     if (!this.state.showDropdown && this.props.disabled) return;
+    const { preferredCountries, onlyCountries, selectedCountry } = this.state
+    const allCountries = this.concatPreferredCountries(preferredCountries, onlyCountries);
+
+    const highlightCountryIndex = allCountries.findIndex(o =>
+      o.dialCode === selectedCountry.dialCode && o.iso2 === selectedCountry.iso2);
+
+    this.setState({
+      showDropdown: !this.state.showDropdown,
+      highlightCountryIndex,
+    }, () => {
+      if (this.state.showDropdown) {
+        this.scrollTo(this.getElement(this.state.highlightCountryIndex));
+      }
+    });
+  }
+
+  handleFlagSelect = (e) => {
     const { preferredCountries, onlyCountries, selectedCountry } = this.state
     const allCountries = this.concatPreferredCountries(preferredCountries, onlyCountries);
 
@@ -617,6 +635,9 @@ class PhoneInput extends React.Component {
   handleFlagItemClick = (country, e) => {
     const currentSelectedCountry = this.state.selectedCountry;
     const newSelectedCountry = this.state.onlyCountries.find(o => o == country);
+
+    console.log('newSelectedCountry', newSelectedCountry);
+
     if (!newSelectedCountry) return;
 
     const unformattedNumber = this.state.formattedNumber.replace(' ', '').replace('(', '').replace(')', '').replace('-', '');
@@ -963,6 +984,7 @@ class PhoneInput extends React.Component {
 
     return (
       <div
+        ref={el => this.dropdownContainerRef = el}
         className={`${containerClasses} ${this.props.className}`}
         style={this.props.style || this.props.containerStyle}
         onKeyDown={this.handleKeydown}>
@@ -996,7 +1018,6 @@ class PhoneInput extends React.Component {
         <div
           className={flagViewClasses}
           style={this.props.buttonStyle}
-          ref={el => this.dropdownContainerRef = el}
         >
           {renderStringAsFlag ?
           <div className={selectedFlagClasses}>{renderStringAsFlag}</div>
