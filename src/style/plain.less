@@ -84,68 +84,75 @@
       }
     }
   }
-  .country-list {
+  .country-list-container {
     outline: none;
     z-index: 1;
-    list-style: none;
     position: absolute;
     padding: 0;
     margin: 0px 0 10px -1px;
     background-color: white;
     border: 1px solid #cacaca;
-    width: 300px;
     max-height: 282px;
-    overflow-y: scroll;
-    .flag {
-      display: inline-block;
-    }
-    .divider {
-      padding-bottom: 5px;
-      margin-bottom: 5px;
-      border-bottom: 1px solid #ccc;
-    }
-    .country {
-      padding: 5px 9px;
-      .dial-code {
-        color: #6b6b6b;
+    overflow-y: hidden;
+
+    .country-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 282px;
+      overflow-y: scroll;
+      cursor: pointer;
+      .flag {
+        display: inline-block;
       }
-      &:hover {
-        background-color: #f1f1f1;
+      .divider {
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        border-bottom: 1px solid #ccc;
       }
-      &.highlight {
-        background-color: #f1f1f1;
+      .country {
+        padding: 5px 9px;
+        .dial-code {
+          color: #6b6b6b;
+        }
+        &:hover {
+          background-color: #f1f1f1;
+        }
+        &.highlight {
+          background-color: #f1f1f1;
+        }
       }
-    }
-    .flag {
-      margin-right: 7px;
-      margin-top: 2px;
-    }
-    .country-name {
-      margin-right: 6px;
-    }
-    .search {
-      position: sticky;
-      top: 0;
-      background-color: #fff;
-    }
-    .search-emoji {
-      font-size: 15px;
-      position: absolute;
-      top: 5px;
-      left: 9px;
-    }
-    .search-box {
-      border: none;
-      border-bottom: 1px solid #cacaca;
-      width: 100%;
-      font-size: 15px;
-      line-height: 15px;
-      padding: 5px 8px 5px 32px;
-      outline: none;
-    }
-    .no-entries-message {
-      padding: 7px 10px 11px;
-      opacity: .7;
+      .flag {
+        margin-right: 7px;
+        margin-top: 2px;
+      }
+      .country-name {
+        margin-right: 6px;
+      }
+      .search {
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+      }
+      .search-emoji {
+        font-size: 15px;
+        position: absolute;
+        top: 5px;
+        left: 9px;
+      }
+      .search-box {
+        border: none;
+        border-bottom: 1px solid #cacaca;
+        width: 100%;
+        font-size: 15px;
+        line-height: 15px;
+        padding: 5px 8px 5px 32px;
+        outline: none;
+      }
+      .no-entries-message {
+        padding: 7px 10px 11px;
+        opacity: .7;
+      }
     }
   }
   .invalid-number-message {
