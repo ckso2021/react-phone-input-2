@@ -35,6 +35,7 @@ class PhoneInput extends React.Component {
     containerClass: PropTypes.string,
     inputClass: PropTypes.string,
     buttonClass: PropTypes.string,
+    dropdownContainerClass: PropTypes.string,
     dropdownClass: PropTypes.string,
     searchClass: PropTypes.string,
     // for styled-components
@@ -125,6 +126,7 @@ class PhoneInput extends React.Component {
     containerClass: '',
     inputClass: '',
     buttonClass: '',
+    dropdownContainerClass: '',
     dropdownClass: '',
     searchClass: '',
     className: '',
@@ -849,6 +851,12 @@ class PhoneInput extends React.Component {
     (preferredCountries.length > 0) && (!enableSearch || enableSearch && !searchValue.trim()) &&
     countryDropdownList.splice(preferredCountries.length, 0, dashedLi);
 
+    const dropDownContainerClasses = classNames({
+      'country-list-container': true,
+      'hide': !showDropdown,
+      [this.props.dropdownContainerClass]: true,
+    });
+
     const dropDownClasses = classNames({
       'country-list': true,
       'hide': !showDropdown,
@@ -856,57 +864,59 @@ class PhoneInput extends React.Component {
     });
 
     return (
-      <ul
-        ref={el => {
-          !enableSearch && el && el.focus();
-          return (this.dropdownRef = el);
-        }}
-        className={dropDownClasses}
-        style={this.props.dropdownStyle}
-        role='listbox'
-        tabIndex='0'
-      >
-        {enableSearch && (
-          <li
-            className={classNames({
-              search: true,
-              [searchClass]: searchClass,
-            })}
-          >
-            {!disableSearchIcon &&
-              <span
-                className={classNames({
-                  'search-emoji': true,
-                  [`${searchClass}-emoji`]: searchClass,
-                })}
-                role='img'
-                aria-label='Magnifying glass'
-              >
-                &#128270;
-              </span>}
-            <input
+      <div className={dropDownContainerClasses}>
+        <ul
+          ref={el => {
+            !enableSearch && el && el.focus();
+            return (this.dropdownRef = el);
+          }}
+          className={dropDownClasses}
+          style={this.props.dropdownStyle}
+          role='listbox'
+          tabIndex='0'
+        >
+          {enableSearch && (
+            <li
               className={classNames({
-                'search-box': true,
-                [`${searchClass}-box`]: searchClass,
+                search: true,
+                [searchClass]: searchClass,
               })}
-              style={searchStyle}
-              type='search'
-              placeholder={searchPlaceholder}
-              autoFocus={true}
-              autoComplete={autocompleteSearch ? 'on' : 'off'}
-              value={searchValue}
-              onChange={this.handleSearchChange}
-            />
-          </li>
-        )}
-        {countryDropdownList.length > 0
-          ? countryDropdownList
-          : (
-            <li className='no-entries-message'>
-              <span>{searchNotFound}</span>
+            >
+              {!disableSearchIcon &&
+                <span
+                  className={classNames({
+                    'search-emoji': true,
+                    [`${searchClass}-emoji`]: searchClass,
+                  })}
+                  role='img'
+                  aria-label='Magnifying glass'
+                >
+                  &#128270;
+                </span>}
+              <input
+                className={classNames({
+                  'search-box': true,
+                  [`${searchClass}-box`]: searchClass,
+                })}
+                style={searchStyle}
+                type='search'
+                placeholder={searchPlaceholder}
+                autoFocus={true}
+                autoComplete={autocompleteSearch ? 'on' : 'off'}
+                value={searchValue}
+                onChange={this.handleSearchChange}
+              />
             </li>
           )}
-      </ul>
+          {countryDropdownList.length > 0
+            ? countryDropdownList
+            : (
+              <li className='no-entries-message'>
+                <span>{searchNotFound}</span>
+              </li>
+            )}
+        </ul>
+      </div>
     );
   }
 
@@ -1004,9 +1014,8 @@ class PhoneInput extends React.Component {
               {!disableDropdown && <div className={arrowClasses}></div>}
             </div>
           </div>}
-
-          {showDropdown && this.getCountryDropdownList()}
         </div>
+        {showDropdown && this.getCountryDropdownList()}
       </div>
     );
   }
