@@ -29,6 +29,7 @@ class PhoneInput extends React.Component {
     containerStyle: PropTypes.object,
     inputStyle: PropTypes.object,
     buttonStyle: PropTypes.object,
+    dropdownContainerStyle: PropTypes.string,
     dropdownStyle: PropTypes.object,
     searchStyle: PropTypes.object,
 
@@ -120,6 +121,7 @@ class PhoneInput extends React.Component {
     containerStyle: {},
     inputStyle: {},
     buttonStyle: {},
+    dropdownContainerStyle: {},
     dropdownStyle: {},
     searchStyle: {},
 
@@ -885,7 +887,7 @@ class PhoneInput extends React.Component {
     });
 
     return (
-      <div className={dropDownContainerClasses}>
+      <div className={dropDownContainerClasses} style={this.props.dropdownContainerStyle}>
         <ul
           ref={el => {
             !enableSearch && el && el.focus();

@@ -12,12 +12,14 @@ declare module "react-phone-input-2" {
     containerClass?: string;
     inputClass?: string;
     buttonClass?: string;
+    dropdownContainerClass: string;
     dropdownClass?: string;
     searchClass?: string;
 
     containerStyle?: React.CSSProperties;
     inputStyle?: React.CSSProperties;
     buttonStyle?: React.CSSProperties;
+    dropdownContainerStyle?: React.CSSProperties;
     dropdownStyle?: React.CSSProperties;
     searchStyle?: React.CSSProperties;
   }

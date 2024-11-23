@@ -184,6 +184,11 @@ import 'react-phone-input-2/lib/style.css'
     <td> string </td>
     <td colspan="2"> class for dropdown button </td>
   </tr>
+    <tr>
+    <td> dropdownContainerClass </td>
+    <td> string </td>
+    <td colspan="2"> class for dropdown outer container </td>
+  </tr>
   <tr>
     <td> dropdownClass </td>
     <td> string </td>
@@ -209,6 +214,11 @@ import 'react-phone-input-2/lib/style.css'
     <td> buttonStyle </td>
     <td> object </td>
     <td colspan="2"> styles for dropdown button </td>
+  </tr>
+    <tr>
+    <td> dropdownContainerStyle </td>
+    <td> object </td>
+    <td colspan="2"> styles for dropdown outer container </td>
   </tr>
   <tr>
     <td> dropdownStyle </td>
